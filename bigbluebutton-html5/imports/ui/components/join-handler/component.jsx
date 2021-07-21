@@ -173,6 +173,7 @@ class JoinHandler extends Component {
       Session.set('bannerColor', resp.bannerColor);
     };
     const setThemeColors = (resp) => {
+      console.log(resp);
       const pc = resp.metadata[0]['primary-color']; // pc = primary color
       const sc = resp.metadata[3]['secondary-color']; // sc = secondary color
       if (pc) {

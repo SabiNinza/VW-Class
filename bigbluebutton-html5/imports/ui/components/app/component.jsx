@@ -14,7 +14,7 @@ import BreakoutRoomInvitation from '/imports/ui/components/breakout-room/invitat
 import ToastContainer from '../toast/container';
 import ModalContainer from '../modal/container';
 import NotificationsBarContainer from '../notifications-bar/container';
-import AudioContainer from '../audio/container';
+// import AudioContainer from '../audio/container';
 import ChatAlertContainer from '../chat/alert/container';
 import BannerBarContainer from '/imports/ui/components/banner-bar/container';
 import WaitingNotifierContainer from '/imports/ui/components/waiting-users/alert/container';
@@ -95,7 +95,7 @@ const propTypes = {
   actionsbar: PropTypes.element,
   captions: PropTypes.element,
   locale: PropTypes.string,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 const defaultProps = {
@@ -393,9 +393,11 @@ class App extends Component {
         </section>
         <UploaderContainer />
         <BreakoutRoomInvitation />
-        {!layoutContextState.presentationIsFullscreen && !layoutContextState.screenShareIsFullscreen && <PollingContainer />}
+        {/* eslint-disable-next-line max-len */}
+        {!layoutContextState.presentationIsFullscreen && !layoutContextState.screenShareIsFullscreen
+            && <PollingContainer />}
         <ModalContainer />
-        <AudioContainer />
+        {/* <AudioContainer /> */}
         <ToastContainer rtl />
         <ChatAlertContainer />
         <WaitingNotifierContainer />

@@ -29,6 +29,7 @@ import ContextProviders from '/imports/ui/components/context-providers/component
 import ChatAdapter from '/imports/ui/components/components-data/chat-context/adapter';
 import UsersAdapter from '/imports/ui/components/components-data/users-context/adapter';
 import GroupChatAdapter from '/imports/ui/components/components-data/group-chat-context/adapter';
+import { Session } from 'meteor/session';
 
 Meteor.startup(() => {
   // Logs all uncaught exceptions to the client logger
@@ -52,11 +53,10 @@ Meteor.startup(() => {
       },
     }, message);
   });
-
   // TODO make this a Promise
   render(
     <ContextProviders>
-      <React.Fragment>
+      <>
         <JoinHandler>
           <AuthenticatedHandler>
             <Subscriptions>
@@ -69,7 +69,7 @@ Meteor.startup(() => {
         <UsersAdapter />
         <ChatAdapter />
         <GroupChatAdapter />
-      </React.Fragment>
+      </>
     </ContextProviders>,
     document.getElementById('app'),
   );

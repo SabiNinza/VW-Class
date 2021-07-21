@@ -83,7 +83,10 @@
   &:hover,
   &:active,
   &:focus {
-    @extend %highContrastOutline;
+    outline:none;
+    border: 2px solid var(--color-primary);
+    box-shadow: none;
+   // @extend %highContrastOutline;
   }
 }
 

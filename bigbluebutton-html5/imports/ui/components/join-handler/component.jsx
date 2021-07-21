@@ -45,7 +45,6 @@ class JoinHandler extends Component {
 
       logger.debug(`Initial connection status change. status: ${status}, connected: ${connected}`);
       if (connected) {
-
         const msToConnect = (new Date() - this.firstJoinTime) / 1000;
         const secondsToConnect = parseFloat(msToConnect).toFixed(2);
 
@@ -163,7 +162,7 @@ class JoinHandler extends Component {
 
       return new Promise((resolve) => {
         if (customdata.length) {
-          makeCall('addUserSettings', customdata).then(r => resolve(r));
+          makeCall('addUserSettings', customdata).then((r) => resolve(r));
         }
         resolve(true);
       });
@@ -173,7 +172,18 @@ class JoinHandler extends Component {
       Session.set('bannerText', resp.bannerText);
       Session.set('bannerColor', resp.bannerColor);
     };
-
+    const setThemeColors = (resp) => {
+      const pc = resp.metadata[0]['primary-color']; // pc = primary color
+      const sc = resp.metadata[3]['secondary-color']; // sc = secondary color
+      if (pc) {
+        document.documentElement.style.setProperty('--color-primary', pc);
+      } else {
+        document.documentElement.style.setProperty('--color-primary', '#7247C4');
+      }
+      if (sc) {
+        document.documentElement.style.setProperty('--color-secondary', sc);
+      }
+    };
     // use enter api to get params for the client
     const url = `/bigbluebutton/api/enter?sessionToken=${sessionToken}`;
     const fetchContent = await fetch(url, { credentials: 'same-origin' });
@@ -189,6 +199,7 @@ class JoinHandler extends Component {
       setBannerProps(response);
       setLogoURL(response);
       setModOnlyMessage(response);
+      setThemeColors(response);
 
       Tracker.autorun(async (cd) => {
         const user = Users.findOne({ userId: Auth.userID, approved: true }, { fields: { _id: 1 } });

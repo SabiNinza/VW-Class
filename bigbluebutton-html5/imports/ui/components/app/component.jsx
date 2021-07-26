@@ -397,7 +397,7 @@ class App extends Component {
         {!layoutContextState.presentationIsFullscreen && !layoutContextState.screenShareIsFullscreen
             && <PollingContainer />}
         <ModalContainer />
-        {/* <AudioContainer /> */}
+        {/* <AudioContainer/> */}
         <ToastContainer rtl />
         <ChatAlertContainer />
         <WaitingNotifierContainer />

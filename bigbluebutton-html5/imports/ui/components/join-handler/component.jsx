@@ -176,6 +176,7 @@ class JoinHandler extends Component {
       console.log(resp);
       const pc = resp.metadata[0]['primary-color']; // pc = primary color
       const sc = resp.metadata[3]['secondary-color']; // sc = secondary color
+      const bi = resp.metadata[4]['back-image']; // bi = background image
       if (pc) {
         document.documentElement.style.setProperty('--color-primary', pc);
       } else {
@@ -183,6 +184,9 @@ class JoinHandler extends Component {
       }
       if (sc) {
         document.documentElement.style.setProperty('--color-secondary', sc);
+      }
+      if (bi) {
+        document.documentElement.style.setProperty('--banner-bg', `url("${bi}")`);
       }
     };
     // use enter api to get params for the client

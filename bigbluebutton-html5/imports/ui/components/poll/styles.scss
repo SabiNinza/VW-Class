@@ -189,7 +189,7 @@
 }
 
 .input {
-    @include inputFocus(var(--color-blue-light));
+ //   @include inputFocus(var(--color-blue-light));
  
     &:hover,
     &:focus {
@@ -246,7 +246,7 @@
 
 .pollQuestion,
 .pollOption {
-    @include inputFocus(var(--color-blue-light));
+   // @include inputFocus(var(--color-primary));
 
     width: 100%;
     color: var(--color-text);
@@ -352,14 +352,14 @@
 }
 
 .selectedBtnBlue {
-    background-color: var(--poll-blue);
-    color: var(--color-white);
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     font-size: var(--font-size-base);
 
     &:hover,
     &:focus,
     &:active {
-        background-color: var(--poll-blue) !important;
+        background-color: var(--color-primary) !important;
         box-shadow: none !important;
         color: var(--color-white) !important;
     }

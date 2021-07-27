@@ -84,7 +84,7 @@ class UserContent extends PureComponent {
             requestUserInformation,
           }}
         />
-        <div>
+        <div className={styles.mbSep}>
           <UserPolls
             isPresenter={currentUser.presenter}
             {...{

@@ -247,6 +247,9 @@ class Settings extends Component {
     } = this.state;
     return (
       <Modal
+        overlayClassName={styles.overlay}
+        className={styles.modal}
+        hideBorder
         title={intl.formatMessage(intlMessages.SettingsLabel)}
         confirm={{
           callback: () => {

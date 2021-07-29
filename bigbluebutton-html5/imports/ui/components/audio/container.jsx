@@ -161,11 +161,12 @@ const messages = {
   },
 };
 
+/* eslint-disable-next-line max-len */
 export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ mountModal, intl, userLocks }) => {
   const { microphoneConstraints } = Settings.application;
   const autoJoin = getFromUserSettings('bbb_auto_join_audio', APP_CONFIG.autoJoin);
-  const enableVideo = getFromUserSettings('bbb_enable_video', KURENTO_CONFIG.enableVideo);
-  const autoShareWebcam = getFromUserSettings('bbb_auto_share_webcam', KURENTO_CONFIG.autoShareWebcam);
+  let enableVideo = getFromUserSettings('bbb_enable_video', KURENTO_CONFIG.enableVideo);
+  let autoShareWebcam = getFromUserSettings('bbb_auto_share_webcam', KURENTO_CONFIG.autoShareWebcam);
   const { userWebcam, userMic } = userLocks;
 
   const userSelectedMicrophone = didUserSelectedMicrophone();
@@ -177,8 +178,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
   });
 
   const openVideoPreviewModal = () => new Promise((resolve) => {
-    if (userWebcam) return resolve();
-    mountModal(<VideoPreviewContainer resolve={resolve} />);
+    if (userWebcam) {
+      mountModal(<VideoPreviewContainer resolve={resolve} />);
+    }
+    return resolve();
   });
 
   if (Service.isConnected() && !Service.isListenOnly()) {
@@ -205,10 +208,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
         return;
       }
       setTimeout(() => openAudioModal().then(() => {
-         if (enableVideo && autoShareWebcam) {
-           openVideoPreviewModal();
-          }
-        }), 0);
+        if (enableVideo && autoShareWebcam) {
+          openVideoPreviewModal();
+        }
+      }), 0);
     },
   });
 
@@ -219,8 +222,8 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
     userSelectedListenOnly,
     init: () => {
       Service.init(messages, intl);
-      const enableVideo = getFromUserSettings('bbb_enable_video', KURENTO_CONFIG.enableVideo);
-      const autoShareWebcam = getFromUserSettings('bbb_auto_share_webcam', KURENTO_CONFIG.autoShareWebcam);
+      enableVideo = getFromUserSettings('bbb_enable_video', KURENTO_CONFIG.enableVideo);
+      autoShareWebcam = getFromUserSettings('bbb_auto_share_webcam', KURENTO_CONFIG.autoShareWebcam);
       if ((!autoJoin || didMountAutoJoin)) {
         if (enableVideo && autoShareWebcam) {
           openVideoPreviewModal();
@@ -234,7 +237,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
         userSelectedMicrophone
         && userSelectedListenOnly
         && meetingIsBreakout)) {
-        openAudioModal();
+        // openAudioModal();
         didMountAutoJoin = true;
       }
     },

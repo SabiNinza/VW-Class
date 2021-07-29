@@ -136,6 +136,10 @@
   border: 5px solid var(--color-primary);
   background-color: #fff; //#f1f8ff;
 }
+.audioBtn:hover span:first-child i,
+.audioBtn:focus span:first-child i{
+  color: var(--color-primary);
+}
 
 // Modifies the button label text
 .audioBtn span:last-child {
